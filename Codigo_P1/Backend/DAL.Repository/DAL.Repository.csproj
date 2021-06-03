@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DAL.EF\DAL.EF.csproj" />
+  </ItemGroup>
+
 </Project>
