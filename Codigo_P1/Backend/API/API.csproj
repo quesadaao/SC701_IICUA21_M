@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\BS\BS.csproj" />
+    <ProjectReference Include="..\DAL.DO\DAL.DO.csproj" />
+    <ProjectReference Include="..\DAL.EF\DAL.EF.csproj" />
   </ItemGroup>
 
 

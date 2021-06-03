@@ -1,47 +1,42 @@
 ﻿using DAL.DO.Interfaces;
 using DAL.EF;
-using DAL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using data = DAL.DO.Objects;
 
-namespace DAL
+namespace BS
 {
     public class Foci : ICRUD<data.Foci>
     {
-        private Repository<data.Foci> _repo = null;
+        private SolutionDbContext context;
 
-        public Foci(SolutionDbContext solutionDbContext) 
-        {
-            _repo = new Repository<data.Foci>(solutionDbContext);
+        public Foci(SolutionDbContext _context) {
+            context = _context;
         }
         public void Delete(data.Foci t)
         {
-            _repo.Delete(t);
-            _repo.Commit();
+            new DAL.Foci(context).Delete(t);
         }
 
         public IEnumerable<data.Foci> GetAll()
         {
-            return _repo.GetAll();
+            return new DAL.Foci(context).GetAll();
         }
 
         public data.Foci GetOneByID(int id)
         {
-            return _repo.GetOneById(id);
+            return new DAL.Foci(context).GetOneByID(id);
         }
 
         public void Insert(data.Foci t)
         {
-            _repo.Insert(t);
-            _repo.Commit();
+            new DAL.Foci(context).Insert(t);
         }
 
         public void Update(data.Foci t)
         {
-            _repo.Update(t);
-            _repo.Commit();
+            new DAL.Foci(context).Update(t);
         }
     }
 }
