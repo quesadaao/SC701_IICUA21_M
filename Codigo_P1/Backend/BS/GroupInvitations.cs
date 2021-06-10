@@ -3,6 +3,7 @@ using DAL.EF;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using data = DAL.DO.Objects;
 
 namespace BS
@@ -26,9 +27,19 @@ namespace BS
             return new DAL.GroupInvitations(context).GetAll();
         }
 
+        public async Task<IEnumerable<data.GroupInvitations>> GetAllWithAsync()
+        {
+            return await new DAL.GroupInvitations(context).GetAllWithAsync();
+        }
+
         public data.GroupInvitations GetOneByID(int id)
         {
             return new DAL.GroupInvitations(context).GetOneByID(id);
+        }
+
+        public async Task<data.GroupInvitations> GetOneByIdWithAsync(int id)
+        {
+            return await new DAL.GroupInvitations(context).GetOneByIdWithAsync(id);
         }
 
         public void Insert(data.GroupInvitations t)

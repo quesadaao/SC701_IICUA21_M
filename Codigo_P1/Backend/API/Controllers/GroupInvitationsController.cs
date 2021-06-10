@@ -24,14 +24,15 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<data.GroupInvitations>>> GetGroupInvitations()
         {
-            return new BS.GroupInvitations(_context).GetAll().ToList();
+            var res = await new BS.GroupInvitations(_context).GetAllWithAsync();
+            return res.ToList();
         }
 
         // GET: api/GroupInvitations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<data.GroupInvitations>> GetGroupInvitations(int id)
         {
-            var groupInvitations = new BS.GroupInvitations(_context).GetOneByID(id);
+            var groupInvitations = await new BS.GroupInvitations(_context).GetOneByIdWithAsync(id);
 
             if (groupInvitations == null)
             {
@@ -97,7 +98,7 @@ namespace API.Controllers
 
         private bool GroupInvitationsExists(int id)
         {
-            return _context.GroupInvitations.Any(e => e.GroupInvitationId == id);
+            return (new BS.GroupInvitations(_context).GetOneByID(id) != null);
         }
     }
 }

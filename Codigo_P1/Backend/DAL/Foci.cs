@@ -4,17 +4,18 @@ using DAL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using data = DAL.DO.Objects;
 
 namespace DAL
 {
     public class Foci : ICRUD<data.Foci>
     {
-        private Repository<data.Foci> _repo = null;
+        private RepositoryFoci _repo = null;
 
         public Foci(SolutionDbContext solutionDbContext) 
         {
-            _repo = new Repository<data.Foci>(solutionDbContext);
+            _repo = new RepositoryFoci(solutionDbContext);
         }
         public void Delete(data.Foci t)
         {
@@ -27,9 +28,19 @@ namespace DAL
             return _repo.GetAll();
         }
 
+        public async Task<IEnumerable<data.Foci>> GetAllWithAsync()
+        {
+            return await _repo.GetAllWithAsAsync();
+        }
+
         public data.Foci GetOneByID(int id)
         {
             return _repo.GetOneById(id);
+        }
+
+        public async Task<data.Foci> GetOneByIdWithAsync(int id)
+        {
+            return await _repo.GetOneByIdAsAsync(id);
         }
 
         public void Insert(data.Foci t)

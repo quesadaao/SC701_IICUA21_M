@@ -9,48 +9,47 @@ using data = DAL.DO.Objects;
 
 namespace DAL
 {
-
-    public class GroupInvitations : ICRUD<data.GroupInvitations>
+     public class GroupRequests : ICRUD<data.GroupRequests>
     {
-        private RepositoryGroupInvitations _repo = null;
+        private RepositoryGroupRequest _repo = null;
 
-        public GroupInvitations(SolutionDbContext solutionDbContext)
+        public GroupRequests(SolutionDbContext solutionDbContext)
         {
-            _repo = new RepositoryGroupInvitations(solutionDbContext);
+            _repo = new RepositoryGroupRequest(solutionDbContext);
         }
-        public void Delete(data.GroupInvitations t)
+        public void Delete(data.GroupRequests t)
         {
             _repo.Delete(t);
             _repo.Commit();
         }
 
-        public IEnumerable<data.GroupInvitations> GetAll()
+        public IEnumerable<data.GroupRequests> GetAll()
         {
             return _repo.GetAll();
         }
 
-        public async Task<IEnumerable<data.GroupInvitations>> GetAllWithAsync()
+        public async Task<IEnumerable<data.GroupRequests>> GetAllWithAsync()
         {
             return await _repo.GetAllWithAsAsync();
         }
 
-        public data.GroupInvitations GetOneByID(int id)
+        public data.GroupRequests GetOneByID(int id)
         {
             return _repo.GetOneById(id);
         }
 
-        public async Task<data.GroupInvitations> GetOneByIdWithAsync(int id)
+        public async Task<data.GroupRequests> GetOneByIdWithAsync(int id)
         {
             return await _repo.GetOneByIdAsAsync(id);
         }
 
-        public void Insert(data.GroupInvitations t)
+        public void Insert(data.GroupRequests t)
         {
             _repo.Insert(t);
             _repo.Commit();
         }
 
-        public void Update(data.GroupInvitations t)
+        public void Update(data.GroupRequests t)
         {
             _repo.Update(t);
             _repo.Commit();

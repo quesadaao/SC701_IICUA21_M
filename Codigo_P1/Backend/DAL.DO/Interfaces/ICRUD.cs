@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DAL.DO.Interfaces
 {
@@ -11,5 +12,8 @@ namespace DAL.DO.Interfaces
         void Delete(T t);
         IEnumerable<T> GetAll();
         T GetOneByID(int id);
+
+        Task<IEnumerable<T>> GetAllWithAsync();
+        Task<T> GetOneByIdWithAsync(int id);
     }
 }

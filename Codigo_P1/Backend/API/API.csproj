@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\GroupInvitationsController.cs" />
+    <Compile Remove="Controllers\GroupRequestController.cs" />
+    <Compile Remove="Controllers\GroupsController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />
