@@ -3,6 +3,7 @@ using DAL.EF;
 using DAL.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using data = DAL.DO.Objects;
@@ -43,6 +44,12 @@ namespace DAL
         {
             throw new NotImplementedException();
         }
+
+        // Hacer filtro por fechas para obtener data 
+        //public IEnumerable<data.Groups> GetbyDate(Expression<Func<T, bool>> predicado)
+        //{ 
+            
+        //}
 
         public void Insert(data.Groups t)
         {

@@ -28,7 +28,7 @@ namespace DAL.Repository
         {
             return await _db.Foci
                .Include(m => m.Group)
-               .SingleOrDefaultAsync(m => m.GroupId == id);
+               .SingleOrDefaultAsync(m => m.FocusId == id);
         }
 
         private SolutionDbContext _db

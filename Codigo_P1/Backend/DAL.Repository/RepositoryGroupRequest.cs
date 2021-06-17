@@ -27,7 +27,7 @@ namespace DAL.Repository
         {
             return await _db.GroupRequests
                .Include(m => m.Group)
-               .SingleOrDefaultAsync(m => m.GroupId == id);
+               .SingleOrDefaultAsync(m => m.GroupRequestId == id);
         }
 
         private SolutionDbContext _db {

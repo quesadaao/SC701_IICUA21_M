@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using data = DAL.DO.Objects;
 using DAL.EF;
+using AutoMapper;
 
 namespace API.Controllers
 {
@@ -15,38 +16,42 @@ namespace API.Controllers
     {
         private readonly SolutionDbContext _context;
 
-        public GroupInvitationsController(SolutionDbContext context)
+        private readonly IMapper _mapper;
+        public GroupInvitationsController(SolutionDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/GroupInvitations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<data.GroupInvitations>>> GetGroupInvitations()
+        public async Task<ActionResult<IEnumerable<DataModels.GroupInvitations>>> GetGroupInvitations()
         {
             var res = await new BS.GroupInvitations(_context).GetAllWithAsync();
-            return res.ToList();
+            var mapaux = _mapper.Map<IEnumerable<data.GroupInvitations>, IEnumerable<DataModels.GroupInvitations>>(res).ToList();
+
+            return mapaux;
         }
 
         // GET: api/GroupInvitations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<data.GroupInvitations>> GetGroupInvitations(int id)
+        public async Task<ActionResult<DataModels.GroupInvitations>> GetGroupInvitations(int id)
         {
             var groupInvitations = await new BS.GroupInvitations(_context).GetOneByIdWithAsync(id);
-
+            var mapaux = _mapper.Map<data.GroupInvitations, DataModels.GroupInvitations>(groupInvitations);
             if (groupInvitations == null)
             {
                 return NotFound();
             }
 
-            return groupInvitations;
+            return mapaux;
         }
 
         // PUT: api/GroupInvitations/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGroupInvitations(int id, data.GroupInvitations groupInvitations)
+        public async Task<IActionResult> PutGroupInvitations(int id, DataModels.GroupInvitations groupInvitations)
         {
             if (id != groupInvitations.GroupInvitationId)
             {
@@ -55,7 +60,9 @@ namespace API.Controllers
 
             try
             {
-                new BS.GroupInvitations(_context).Update(groupInvitations);
+                var mapaux = _mapper.Map<DataModels.GroupInvitations, data.GroupInvitations>(groupInvitations);
+                new BS.GroupInvitations(_context).Update(mapaux);
+
             }
             catch (Exception ee)
             {
@@ -76,15 +83,16 @@ namespace API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<data.GroupInvitations>> PostGroupInvitations(data.GroupInvitations groupInvitations)
+        public async Task<ActionResult<DataModels.GroupInvitations>> PostGroupInvitations(DataModels.GroupInvitations groupInvitations)
         {
-            new BS.GroupInvitations(_context).Insert(groupInvitations);
+            var mapaux = _mapper.Map<DataModels.GroupInvitations, data.GroupInvitations>(groupInvitations);
+            new BS.GroupInvitations(_context).Insert(mapaux);
             return CreatedAtAction("GetGroupInvitations", new { id = groupInvitations.GroupInvitationId }, groupInvitations);
         }
 
         // DELETE: api/GroupInvitations/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<data.GroupInvitations>> DeleteGroupInvitations(int id)
+        public async Task<ActionResult<DataModels.GroupInvitations>> DeleteGroupInvitations(int id)
         {
             var groupInvitations = new BS.GroupInvitations(_context).GetOneByID(id);
             if (groupInvitations == null)
@@ -93,7 +101,9 @@ namespace API.Controllers
             }
 
             new BS.GroupInvitations(_context).Delete(groupInvitations);
-            return groupInvitations;
+            var mapaux = _mapper.Map<data.GroupInvitations, DataModels.GroupInvitations>(groupInvitations);
+
+            return mapaux;
         }
 
         private bool GroupInvitationsExists(int id)
