@@ -18,6 +18,8 @@ namespace DAL.EF
         public virtual DbSet<Foci> Foci { get; set; }
         public virtual DbSet<Groups> Groups { get; set; }
 
+        public virtual DbSet<GroupUpdates> GroupUpdates { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Foci>(entity =>
@@ -88,6 +90,19 @@ namespace DAL.EF
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.GroupName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<GroupUpdates>(entity =>
+            {
+                entity.HasKey(e => e.GroupUpdateId)
+                    .HasName("PK_dbo.GroupUpdates");
+
+                entity.HasIndex(e => e.GroupGoalId)
+                    .HasName("IX_GroupGoalId");
+
+                entity.Property(e => e.Status).HasColumnName("status");
+
+                entity.Property(e => e.UpdateDate).HasColumnType("datetime");
             });
 
             OnModelCreatingPartial(modelBuilder);
