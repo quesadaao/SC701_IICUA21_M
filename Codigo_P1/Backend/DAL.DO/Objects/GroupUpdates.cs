@@ -8,8 +8,8 @@ namespace DAL.DO.Objects
     {
         public GroupUpdates()
         {
-            //GroupComments = new HashSet<GroupComments>();
-            //GroupUpdateSupports = new HashSet<GroupUpdateSupports>();
+            GroupComments = new HashSet<GroupComments>();
+            GroupUpdateSupports = new HashSet<GroupUpdateSupports>();
         }
 
         public int GroupUpdateId { get; set; }
@@ -18,7 +18,7 @@ namespace DAL.DO.Objects
         public int GroupGoalId { get; set; }
         public DateTime UpdateDate { get; set; }
 
-        //public virtual ICollection<GroupComments> GroupComments { get; set; }
-        //public virtual ICollection<GroupUpdateSupports> GroupUpdateSupports { get; set; }
+        public virtual ICollection<GroupComments> GroupComments { get; set; }
+        public virtual ICollection<GroupUpdateSupports> GroupUpdateSupports { get; set; }
     }
 }

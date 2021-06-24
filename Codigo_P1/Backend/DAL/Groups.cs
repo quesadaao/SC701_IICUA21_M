@@ -46,10 +46,22 @@ namespace DAL
         }
 
         // Hacer filtro por fechas para obtener data 
-        //public IEnumerable<data.Groups> GetbyDate(Expression<Func<T, bool>> predicado)
-        //{ 
-            
-        //}
+        public IEnumerable<data.Groups> GetAllbyDate(DateTime dateTime)
+        {
+            return _repo.Searh(s => s.CreatedDate > dateTime);
+        }
+
+        // Hacer filtro por texto para obtener data 
+        public data.Groups GetOnebyTextDescription(data.Groups t, string filter)
+        {
+            // Buscando por Description 
+            //return _repo.GetOne(s => s.GroupId == t.GroupId && s.Description.Contains(filter));
+
+            //Buscando por GroupName
+            //return _repo.GetOne(s => s.GroupId == t.GroupId && s.GroupName.Contains(filter));
+
+            return _repo.GetOne(s => s.Description.Contains(filter));
+        }
 
         public void Insert(data.Groups t)
         {

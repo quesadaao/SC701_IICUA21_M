@@ -27,10 +27,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DataModels.GroupUpdates>>> GetGroupUpdates()
         {
-            //return await _context.GroupUpdates.ToListAsync();
-
             var res = new BS.GroupUpdates(_context).GetAll();
-
             var mapaux = _mapper.Map<IEnumerable<data.GroupUpdates>, IEnumerable<DataModels.GroupUpdates>>(res).ToList();
 
             return mapaux;
@@ -89,7 +86,6 @@ namespace API.Controllers
         {
             var mapaux = _mapper.Map<DataModels.GroupUpdates, data.GroupUpdates>(groupUpdates);
             new BS.GroupUpdates(_context).Insert(mapaux);
-            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetGroupUpdates", new { id = groupUpdates.GroupUpdateId }, groupUpdates);
         }

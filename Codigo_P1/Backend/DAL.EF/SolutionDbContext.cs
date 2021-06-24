@@ -20,6 +20,10 @@ namespace DAL.EF
 
         public virtual DbSet<GroupUpdates> GroupUpdates { get; set; }
 
+        public virtual DbSet<GroupComments> GroupComments { get; set; }
+
+        public virtual DbSet<GroupUpdateSupports> GroupUpdateSupports { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Foci>(entity =>
@@ -104,6 +108,40 @@ namespace DAL.EF
 
                 entity.Property(e => e.UpdateDate).HasColumnType("datetime");
             });
+
+            modelBuilder.Entity<GroupComments>(entity =>
+            {
+                entity.HasKey(e => e.GroupCommentId)
+                    .HasName("PK_dbo.GroupComments");
+
+                entity.HasIndex(e => e.GroupUpdateId)
+                    .HasName("IX_GroupUpdateId");
+
+                entity.Property(e => e.CommentDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.GroupUpdate)
+                    .WithMany(p => p.GroupComments)
+                    .HasForeignKey(d => d.GroupUpdateId)
+                    .HasConstraintName("FK_dbo.GroupComments_dbo.GroupUpdates_GroupUpdateId");
+            });
+
+            modelBuilder.Entity<GroupUpdateSupports>(entity =>
+            {
+                entity.HasKey(e => e.GroupUpdateSupportId)
+                    .HasName("PK_dbo.GroupUpdateSupports");
+
+                entity.HasIndex(e => e.GroupUpdateId)
+                    .HasName("IX_GroupUpdateId");
+
+                entity.Property(e => e.UpdateSupportedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.GroupUpdate)
+                    .WithMany(p => p.GroupUpdateSupports)
+                    .HasForeignKey(d => d.GroupUpdateId)
+                    .HasConstraintName("FK_dbo.GroupUpdateSupports_dbo.GroupUpdates_GroupUpdateId");
+            });
+
+
 
             OnModelCreatingPartial(modelBuilder);
         }
