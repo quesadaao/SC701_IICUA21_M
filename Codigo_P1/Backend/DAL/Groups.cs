@@ -61,6 +61,7 @@ namespace DAL
             //return _repo.GetOne(s => s.GroupId == t.GroupId && s.GroupName.Contains(filter));
 
             return _repo.GetOne(s => s.Description.Contains(filter));
+
         }
 
         public void Insert(data.Groups t)
