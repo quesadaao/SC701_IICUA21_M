@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using FrontEnd.API.Servicios;
 
 namespace FrontEnd.API.Controllers
 {
     public class GroupInvitationsController : Controller
     {
+
+        GroupsServices servicios = new GroupsServices();
+
         // GET: GroupInvitations
         public async Task<IActionResult> Index()
         {
@@ -51,7 +55,7 @@ namespace FrontEnd.API.Controllers
         // GET: GroupInvitations/Create
         public IActionResult Create()
         {
-            ViewData["GroupId"] = new SelectList(GetAll(), "GroupId", "GroupName");
+            ViewData["GroupId"] = new SelectList(servicios.GetAll(), "GroupId", "GroupName");
             return View();
         }
 
@@ -79,7 +83,7 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            ViewData["GroupId"] = new SelectList(GetAll(), "GroupId", "GroupName", groupInvitations.GroupId);
+            ViewData["GroupId"] = new SelectList(servicios.GetAll(), "GroupId", "GroupName", groupInvitations.GroupId);
             return View(groupInvitations);
         }
 
@@ -96,7 +100,7 @@ namespace FrontEnd.API.Controllers
             {
                 return NotFound();
             }
-            ViewData["GroupId"] = new SelectList(GetAll(), "GroupId", "GroupName", groupInvitations.GroupId);
+            ViewData["GroupId"] = new SelectList(servicios.GetAll(), "GroupId", "GroupName", groupInvitations.GroupId);
             return View(groupInvitations);
         }
 
@@ -145,7 +149,7 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GroupId"] = new SelectList(GetAll(), "GroupId", "GroupName", groupInvitations.GroupId);
+            ViewData["GroupId"] = new SelectList(servicios.GetAll(), "GroupId", "GroupName", groupInvitations.GroupId);
             return View(groupInvitations);
         }
 
