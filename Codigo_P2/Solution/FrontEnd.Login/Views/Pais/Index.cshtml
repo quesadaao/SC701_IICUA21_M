@@ -1,0 +1,29 @@
+﻿@model List<string>
+
+@{
+    string nombre = "Haciendo haciendo"; 
+
+}
+
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
+
+<h1>Index</h1>
+
+<p>@nombre</p>
+
+<environment include="Development">
+    <p>"Estoy en Desarrollo"</p>
+
+</environment>
+
+<environment include="Production">
+    <p>"Estoy en Produccion"</p>
+
+</environment>
+
+<ul>
+    @foreach (var pais in Model)
+    { 
+        <li>@pais</li>
+    }
+</ul>

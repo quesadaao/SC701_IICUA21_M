@@ -11,7 +11,7 @@ namespace FrontEnd.Login
 {
     public class Program
     {
-        public static string baseurl = "http://localhost:61186/";
+        public static string baseurl = "http://localhost:59349/";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

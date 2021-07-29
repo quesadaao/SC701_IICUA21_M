@@ -7,14 +7,17 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FrontEnd.Login.Servicios;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEnd.Login.Controllers
 {
+    [Authorize]
     public class GroupInvitationsController : Controller
     {
 
         GroupsServices servicios = new GroupsServices();
 
+        [AllowAnonymous]
         // GET: GroupInvitations
         public async Task<IActionResult> Index()
         {

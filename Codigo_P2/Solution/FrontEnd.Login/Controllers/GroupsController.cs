@@ -1,4 +1,5 @@
 ﻿using FrontEnd.Login.Servicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace FrontEnd.Login.Controllers
 {
+    [Authorize]
     public class GroupsController : Controller
     {
         GroupsServices servicios = new GroupsServices();
