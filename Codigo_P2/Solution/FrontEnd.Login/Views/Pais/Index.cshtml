@@ -5,13 +5,13 @@
 
 }
 
-@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
+@*@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env*@
 
 <h1>Index</h1>
 
 <p>@nombre</p>
 
-<environment include="Development">
+@*<environment include="Development">
     <p>"Estoy en Desarrollo"</p>
 
 </environment>
@@ -19,7 +19,7 @@
 <environment include="Production">
     <p>"Estoy en Produccion"</p>
 
-</environment>
+</environment>*@
 
 <ul>
     @foreach (var pais in Model)
